@@ -50,6 +50,19 @@ On Mac, the magic variable picker (wand icon) that exists on iOS is not availabl
 
 The List action on Mac Shortcuts was previously limited to **5 items** in the UI editor. This limitation has been resolved — Lists can now hold more than 5 items on Mac. If you encounter this in an older macOS version, build the Shortcut on iOS where the limit does not apply; it syncs back to Mac via iCloud.
 
+## Google Sheets: Typed Columns Block Validation Changes
+
+Google Sheets' newer "typed columns" (the `@` chip-style dropdowns in column headers) cannot be modified through the Data Validation UI or the Apps Script `setDataValidation()` / `clearDataValidations()` API. All attempts return: **"This operation is not allowed on cells in typed columns."**
+
+**Workaround:** Delete the typed column and recreate it as a standard column:
+1. Save the column's values via `getValues()`
+2. `deleteColumn()` the typed column
+3. `insertColumnBefore()` at the same position
+4. Write the values back with `setValues()`
+5. Apply standard `setDataValidation()` on the fresh column
+
+This converts it from a typed column to a standard dropdown. The header loses the chip-style indicator but the dropdown works correctly in all data cells. See `setupValidation()` in `apps-script/Code.gs`.
+
 ## Google Sheets: appendRow and Empty Rows
 
 `sheet.appendRow()` appends after the last row with any content — including rows with empty strings (`""`). If you "clear" rows by writing empty strings, `appendRow` will skip past them and write far below.

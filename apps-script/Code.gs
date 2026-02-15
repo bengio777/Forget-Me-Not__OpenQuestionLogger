@@ -42,6 +42,48 @@ function doPost(e) {
 }
 
 /**
+ * Run this function once from the Apps Script editor to set up
+ * data validation dropdowns on Sheet1. This bypasses the
+ * "typed columns" UI restriction in Google Sheets.
+ *
+ * To run: Open Apps Script editor → select setupValidation → click Run
+ */
+function setupValidation() {
+  var ss = SpreadsheetApp.openById("YOUR_GOOGLE_SHEET_ID");
+  var sheet = ss.getSheetByName("Sheet1");
+  var lastRow = Math.max(sheet.getLastRow(), 100);
+
+  // Define columns and their dropdown options
+  var columns = [
+    { col: 2, options: ["Hands-on AI", "Kite The Planet", "Professional", "Security+", "Spanish", "Other"] },       // B: Class
+    { col: 3, options: ["Incomplete", "Answered", "Follow Up"] },                                                     // C: Status
+    { col: 4, options: ["High", "Medium", "Low"] },                                                                   // D: Priority
+    { col: 5, options: ["Conversation", "Homework / Project Work", "Lecture", "Reading", "Practice Exam", "Other"] }  // E: Source
+  ];
+
+  columns.forEach(function(c) {
+    // Save existing values
+    var values = sheet.getRange(1, c.col, lastRow, 1).getValues();
+
+    // Delete the typed column and insert a fresh one
+    sheet.deleteColumn(c.col);
+    sheet.insertColumnBefore(c.col);
+
+    // Restore values
+    sheet.getRange(1, c.col, lastRow, 1).setValues(values);
+
+    // Apply standard dropdown validation (skip header row)
+    sheet.getRange(2, c.col, lastRow - 1, 1).setDataValidation(
+      SpreadsheetApp.newDataValidation()
+        .requireValueInList(c.options)
+        .setAllowInvalid(false)
+        .build());
+  });
+
+  Logger.log("Validation rules applied to columns B, C, D, E (rows 2–" + lastRow + ").");
+}
+
+/**
  * Counts total questions and incomplete questions in the sheet.
  */
 function getStatusCounts(sheet) {
