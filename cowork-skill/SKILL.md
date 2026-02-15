@@ -87,7 +87,9 @@ If the user wants to answer or update a class question:
    - Set the Status column to "Answered" (or "Follow Up" if they say so)
    - Set Date Answered to today (YYYY-MM-DD)
    - Set Answer to the provided text
+   - If status is "Answered", move the row to the "Answered" sheet tab in Google Sheets and delete it from Sheet1
 6. Update Notion too (notion-update-page) with the same status, date answered, and answer
+   - In Notion, setting Status to "Answered" automatically moves the entry to the "Answered" filtered view
 
 ## Reviewing Questions
 
@@ -97,3 +99,11 @@ If the user asks to see their questions or check their backlog:
 2. Present in a clean, scannable format grouped by class
 3. Show count summary (e.g., "12 incomplete: 8 Security+, 3 Spanish, 1 Hands-on AI")
 4. If the user wants to drill into a specific class, filter and show just those
+
+## Notion Views
+
+The Class Questions Tracker uses filtered views:
+- **Active** view: Shows only Incomplete and Follow Up questions (default view)
+- **Answered** view: Shows only Answered questions
+
+When a question's status changes to "Answered", it automatically disappears from the Active view and appears in the Answered view. No page moves are needed.
