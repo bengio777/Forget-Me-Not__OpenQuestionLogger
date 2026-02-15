@@ -10,14 +10,6 @@ Captures questions the user wants to ask later in class and logs them to two des
 1. **Notion database** — "Class Questions Tracker" (data source ID: `<YOUR_NOTION_DATA_SOURCE_ID>`, database ID: `<YOUR_NOTION_DATABASE_ID>`)
 2. **Google Sheet** — "Class Questions Tracker" (spreadsheet ID: `<YOUR_GOOGLE_SHEET_ID>`)
 
-## Known Limitation: Notion MCP Write Bug
-
-The Notion MCP connector has a known serialization bug (GitHub issues #82, #67, #153) where object parameters (`parent` in create-pages, `data` in update-page) get serialized as strings instead of objects, causing all database write operations to fail.
-
-**How to handle this:** Always attempt the Notion write first. If it returns a `-32602` error with "Expected object, received string", log only to Google Sheets and tell the user: "Logged to Google Sheets. Notion write still blocked by the MCP bug — I'll try again next time in case it's been fixed." Do NOT treat this as a failure of the overall operation. The Google Sheet entry is sufficient.
-
-When the bug is eventually fixed, the Notion writes will start working automatically with no skill changes needed.
-
 ## Logging a New Question
 
 Use the AskUserQuestion tool to gather details in a single prompt. Be conversational and quick — the user is studying and doesn't want friction.
@@ -40,9 +32,9 @@ Use the AskUserQuestion tool to gather details in a single prompt. Be conversati
 
 ### Logging Procedure
 
-Once you have the details, attempt BOTH destinations:
+Once you have the details, log to BOTH destinations concurrently:
 
-**Step 1: Try Notion** — Attempt to create a page in the database:
+**Notion** — Create a page in the database:
 ```
 Tool: notion-create-pages
 parent: { "data_source_id": "<YOUR_NOTION_DATA_SOURCE_ID>" }
@@ -58,9 +50,8 @@ pages: [{
   }
 }]
 ```
-If this fails with a serialization error, note it and continue to Step 2.
 
-**Step 2: Google Sheet (always reliable)** — Read the sheet to find the last row, then append:
+**Google Sheet** — Read the sheet to find the last row, then append:
 ```
 Tool: get_google_sheet_content
   spreadsheetId: <YOUR_GOOGLE_SHEET_ID>
@@ -68,6 +59,8 @@ Tool: get_google_sheet_content
 Then: update_google_sheet to row N+1 with:
   [Question, Class, "Incomplete", Priority, Source, Date Entered, "", ""]
 ```
+
+If either destination fails, the other is still sufficient — confirm what was logged.
 
 The Google Sheet has conditional formatting applied:
 - Red rows = Incomplete
@@ -94,7 +87,7 @@ If the user wants to answer or update a class question:
    - Set the Status column to "Answered" (or "Follow Up" if they say so)
    - Set Date Answered to today (YYYY-MM-DD)
    - Set Answer to the provided text
-6. Try updating Notion too (notion-update-page) — if it fails due to the serialization bug, that's OK, just note it
+6. Update Notion too (notion-update-page) with the same status, date answered, and answer
 
 ## Reviewing Questions
 

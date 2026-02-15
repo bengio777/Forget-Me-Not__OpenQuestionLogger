@@ -34,13 +34,11 @@ The old URL continues serving the old code forever.
 
 When switching the Shortcut from JSON to Form body type, update this line in the script accordingly.
 
-## Notion MCP Serialization Bug
+## Notion MCP Serialization Bug (Resolved)
 
-As of February 2026, the Notion MCP connector has a bug where object parameters (`parent`, `data`, `new_parent`) are serialized as strings instead of objects, causing `-32602` errors on all database write operations.
+The Notion MCP connector previously had a bug where object parameters (`parent`, `data`, `new_parent`) were serialized as strings instead of objects, causing `-32602` errors on all database write operations. GitHub issues: #82, #67, #153.
 
-GitHub issues: #82, #67, #153
-
-**Workaround:** Try-then-fallback pattern. Attempt the Notion write, catch the error, fall back to Google Sheets. The skill auto-heals when the bug is fixed.
+**Status:** Fixed as of February 2026. Notion writes now work reliably. The skill logs to both Notion and Google Sheets concurrently.
 
 ## Mac Shortcuts: No "Wand" Icon
 

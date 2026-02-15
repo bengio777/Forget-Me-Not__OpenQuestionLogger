@@ -12,8 +12,8 @@ When you're studying, reading, or just going about your day, questions come up t
 - Any device via the Google Sheet directly
 
 **Track with:**
-- Google Sheets (primary, always reliable)
-- Notion database (secondary, auto-heals when MCP bug is fixed)
+- Google Sheets (primary)
+- Notion database (synced concurrently)
 
 ## Architecture
 
@@ -97,8 +97,6 @@ Then add a `secret` field to your iOS Shortcut's form data.
 
 ## Known Issues
 
-- **Notion MCP Write Bug**: The Notion MCP connector (as of Feb 2026) has a serialization bug preventing database writes. The Cowork skill handles this gracefully with a try-then-fallback pattern.
-- **Mac Shortcuts List Limit**: List actions on Mac are limited to 5 items. iOS may support more.
 - **Apps Script Redeployment**: Code changes require creating a new deployment — editing alone won't update the live version.
 
 ## Project Structure
