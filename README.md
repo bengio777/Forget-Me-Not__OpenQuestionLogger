@@ -18,15 +18,20 @@ When you're studying, reading, or just going about your day, questions come up t
 ## Architecture
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌──────────────┐
-│  Claude Cowork   │────▶│  Google Sheets    │◀────│  Notion DB   │
-│  (Desktop Skill) │     │  (Primary Store)  │     │  (Secondary) │
-└─────────────────┘     └──────────────────┘     └──────────────┘
-                              ▲
 ┌─────────────────┐     ┌──────────────────┐
-│  iOS Shortcut    │────▶│  Google Apps      │
-│  + Siri          │     │  Script (API)     │
+│  Claude Cowork   │────▶│  Google Sheets    │
+│  (Desktop Skill) │     │  (via Apps Script)│
+│                  │     └──────────────────┘
+│                  │
+│                  │     ┌──────────────────┐
+│                  │────▶│  Notion DB       │
+│                  │     │  (via MCP)       │
 └─────────────────┘     └──────────────────┘
+
+┌─────────────────┐     ┌──────────────────┐     ┌──────────────┐
+│  iOS Shortcut    │────▶│  Google Apps      │────▶│ Google Sheets│
+│  + Siri          │     │  Script (API)     │     │              │
+└─────────────────┘     └──────────────────┘     └──────────────┘
 ```
 
 ## Fields Tracked
