@@ -29,7 +29,7 @@ Use the AskUserQuestion tool to gather details in a single prompt. Be conversati
 | **Question** | Yes | Ask the user to state their question |
 | **Class** | Yes | Options: Hands-on AI, Kite The Planet, Professional, Security+, Spanish, Other. If context makes it obvious (e.g. they were just studying Security+), confirm rather than ask. |
 | **Priority** | No | Default "Medium". Options: High, Medium, Low |
-| **Source** | No | Default "Conversation". Options: Conversation, Lecture, Reading, Practice Exam, Other |
+| **Source** | No | Default "Conversation". Options: Conversation, Homework / Project Work, Lecture, Other |
 
 ### Fields to Auto-Fill
 

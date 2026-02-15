@@ -37,7 +37,7 @@ When you're studying, reading, or just going about your day, questions come up t
 | **Class** | Which class it's for (customizable) |
 | **Status** | Incomplete → Answered / Follow Up |
 | **Priority** | High, Medium, Low |
-| **Source** | Where the question came from (Lecture, Reading, Conversation, etc.) |
+| **Source** | Where the question came from (Conversation, Homework / Project Work, Lecture, Other) |
 | **Date Entered** | Auto-filled when logged |
 | **Date Answered** | Filled when you mark it answered |
 | **Answer** | The answer text when resolved |

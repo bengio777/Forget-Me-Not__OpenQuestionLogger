@@ -53,9 +53,8 @@ Build these actions in order in the Shortcuts app (Mac or iOS):
 ### Action 9: List (Source options)
 - **Items:**
   - Conversation
+  - Homework / Project Work
   - Lecture
-  - Reading
-  - Practice Exam
   - Other
 
 ### Action 10: Choose from List
