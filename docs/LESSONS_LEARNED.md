@@ -46,12 +46,9 @@ GitHub issues: #82, #67, #153
 
 On Mac, the magic variable picker (wand icon) that exists on iOS is not available. Instead, right-click in a value field and select **"Select Variable"** to insert a variable reference.
 
-## Mac Shortcuts: List Action Limit
+## Mac Shortcuts: List Action Limit (Resolved)
 
-The List action on Mac Shortcuts is limited to **5 items**. If you need more options, either:
-- Remove the least-used option
-- Build the Shortcut on iOS where the limit may be higher
-- Use multiple List + Choose from List sequences to create sub-menus
+The List action on Mac Shortcuts was previously limited to **5 items** in the UI editor. This limitation has been resolved — Lists can now hold more than 5 items on Mac. If you encounter this in an older macOS version, build the Shortcut on iOS where the limit does not apply; it syncs back to Mac via iCloud.
 
 ## Google Sheets: appendRow and Empty Rows
 

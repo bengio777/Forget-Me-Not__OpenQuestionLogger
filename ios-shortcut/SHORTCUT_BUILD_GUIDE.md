@@ -55,6 +55,8 @@ Build these actions in order in the Shortcuts app (Mac or iOS):
   - Conversation
   - Homework / Project Work
   - Lecture
+  - Reading
+  - Practice Exam
   - Other
 
 ### Action 10: Choose from List
